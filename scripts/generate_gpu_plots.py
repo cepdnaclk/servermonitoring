@@ -108,6 +108,7 @@ def build_gpu_plots(
             if not info.get("active", False):
                 continue
             gpuid_int = int(gpuid)
+            print(f"Generating GPU plot for {server} GPU {gpuid_int}...")
             gpu_frame = frame[frame["gpuid"] == gpuid_int].copy()
             if gpu_frame.empty:
                 continue

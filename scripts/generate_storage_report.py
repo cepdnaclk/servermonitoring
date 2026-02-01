@@ -113,6 +113,7 @@ footer { padding: 10px 20px 20px 20px; }
         )
 
         for server, details in storage_servers.items():
+            print(f"Generating storage report for {server}...")
             log_file = logs_dir / f"{server}-storage.log"
             if not log_file.exists():
                 f_out.write(f"<br><br><h3 id=\"{server}\">{server}</h3>\n")

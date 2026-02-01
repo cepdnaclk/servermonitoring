@@ -1,5 +1,6 @@
 import argparse
 import datetime
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from generate_gpu_plots import build_gpu_plots, load_servers as load_gpu_servers
@@ -98,6 +99,18 @@ def main() -> None:
         default=90,
         help="Number of days to include in GPU plots.",
     )
+    parser.add_argument(
+        "--sync-days",
+        type=int,
+        default=90,
+        help="Number of days of logs to download.",
+    )
+    parser.add_argument(
+        "--sync-workers",
+        type=int,
+        default=8,
+        help="Number of concurrent log download threads.",
+    )
     args = parser.parse_args()
 
     storage_logs = args.data_dir / "logs" / "storage"
@@ -105,7 +118,9 @@ def main() -> None:
 
     if args.download_logs:
         logging_url = f"{args.base_url.rstrip('/')}/logging/"
-        sync_logs(logging_url, storage_logs, gpu_logs)
+        print(f"Syncing logs from {logging_url} (last {args.sync_days} days)...")
+        sync_logs(logging_url, storage_logs, gpu_logs, args.sync_days, args.sync_workers)
+        print("Log sync complete.")
 
     servers_config = args.config_dir / "servers.json"
     gpu_info = args.config_dir / "gpu-info.json"
@@ -118,16 +133,30 @@ def main() -> None:
     output_gpu_dir = args.output_root / "reports" / "server-gpu-util" / "plots"
     output_gpu_index = args.output_root / "reports" / "server-gpu-util" / "index.html"
 
-    build_storage_report(storage_logs, output_storage, storage_servers, student_batches)
-    build_gpu_plots(
-        logs_dir=gpu_logs,
-        gpu_info_path=gpu_info,
-        output_dir=output_gpu_dir,
-        output_index=output_gpu_index,
-        servers=gpu_servers,
-        days=args.days,
-    )
-    write_root_index(args.output_root)
+    print("Building reports...")
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [
+            executor.submit(
+                build_storage_report,
+                storage_logs,
+                output_storage,
+                storage_servers,
+                student_batches,
+            ),
+            executor.submit(
+                build_gpu_plots,
+                logs_dir=gpu_logs,
+                gpu_info_path=gpu_info,
+                output_dir=output_gpu_dir,
+                output_index=output_gpu_index,
+                servers=gpu_servers,
+                days=args.days,
+            ),
+            executor.submit(write_root_index, args.output_root),
+        ]
+        for future in futures:
+            future.result()
+    print("Reports generated.")
     print("Dashboard build complete.")
 
 
