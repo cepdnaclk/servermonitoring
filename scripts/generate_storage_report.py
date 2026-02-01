@@ -88,9 +88,9 @@ footer { padding: 10px 20px 20px 20px; }
   Server Monitoring
 </div>
 <div class="nav">
-  <a href="../../index.html">Home</a>
-  <a class="active" href="../server-storage-util/index.html">Storage</a>
-  <a href="../server-gpu-util/index.html">GPU</a>
+  <a href="../../">Home</a>
+  <a class="active" href="../server-storage-util/">Storage</a>
+  <a href="../server-gpu-util/">GPU</a>
 </div>
 <div class="content">
   <h1>Server Storage Usage</h1>

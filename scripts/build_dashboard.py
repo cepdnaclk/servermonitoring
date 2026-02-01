@@ -38,16 +38,16 @@ body {{ font-family: Arial, sans-serif; margin: 0; }}
   Server Monitoring
 </div>
 <div class="nav">
-  <a class="active" href="index.html">Home</a>
-  <a href="reports/server-storage-util/index.html">Storage</a>
-  <a href="reports/server-gpu-util/index.html">GPU</a>
+  <a class="active" href="./">Home</a>
+  <a href="reports/server-storage-util/">Storage</a>
+  <a href="reports/server-gpu-util/">GPU</a>
 </div>
 <div class="content">
   <h1>Server Monitoring Dashboard</h1>
   <p>Daily updated storage and GPU utilization reports.</p>
   <ul>
-    <li><a href="reports/server-storage-util/index.html">Storage Usage Report</a></li>
-    <li><a href="reports/server-gpu-util/index.html">GPU Usage Plots</a></li>
+    <li><a href="reports/server-storage-util/">Storage Usage Report</a></li>
+    <li><a href="reports/server-gpu-util/">GPU Usage Plots</a></li>
   </ul>
   <hr>
   <footer>
