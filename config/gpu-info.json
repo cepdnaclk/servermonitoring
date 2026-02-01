@@ -1,0 +1,22 @@
+{
+  "ada": {
+    "0": { "active": true, "memory": 48483 },
+    "1": { "active": true, "memory": 48058 },
+    "2": { "active": true, "memory": 47026 }
+  },
+  "ai4covid": {
+    "0": { "active": true, "memory": 32497 },
+    "1": { "active": true, "memory": 32495 }
+  },
+  "ampere": {
+    "0": { "active": true, "memory": 48670 },
+    "1": { "active": true, "memory": 48662 }
+  },
+  "kepler": {
+    "0": { "active": false, "memory": 11424 },
+    "1": { "active": true, "memory": 1900 }
+  },
+  "turing": {
+    "0": { "active": true, "memory": 24246 }
+  }
+}

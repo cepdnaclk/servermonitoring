@@ -1,0 +1,26 @@
+{
+  "storage": {
+    "kepler": {
+      "doc_url": "https://docs.google.com/spreadsheets/d/1qyCokp9XNO9tOghKgX-2SNlR_Gaif1EEOa_mu7_nMOo/edit?usp=sharing"
+    },
+    "turing": {
+      "doc_url": "https://docs.google.com/spreadsheets/d/1f8G_oQVhBhKbaI_rw_gcaFTY4OFbP6T7RiUE66l-dvU/edit?usp=sharing"
+    },
+    "ampere": {
+      "doc_url": "https://docs.google.com/spreadsheets/d/1p2YNp1HqxB9AmEj46M8egR1LJLmsHQ1kYz5Ncp-icJA/edit?usp=sharing"
+    },
+    "ada": {
+      "doc_url": "https://docs.google.com/spreadsheets/d/1v-OgHJj2iGqFuL6z3fmauJLV7rIlX6-EJBW_b1WpeQA/edit?usp=sharing"
+    },
+    "babbage": {
+      "doc_url": null
+    }
+  },
+  "gpu": [
+    "turing",
+    "kepler",
+    "ai4covid",
+    "ampere",
+    "ada"
+  ]
+}

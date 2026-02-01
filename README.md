@@ -1,39 +1,76 @@
 # Server Monitoring Dashboard
 
-Hi! Thanks for volunteering to work on this project.
+Static dashboard for Department of Computer Engineering server utilization
+(GPU and storage). Generated daily and published via GitHub Pages.
 
-## Overview
+## Live Site
 
-This project implements a visualization dashboard for Department Server utilization, displaying both **GPU** and **Storage** metrics.
+`https://cepdnaclk.github.io/servermonitoring/`
 
-## Requirements
+## Data Source
 
-### Data Source
+Base index (logs are under per-server folders):
+`https://tesla.ce.pdn.ac.lk/servermonitoring/`
 
-The dashboard will pull data from:
+## How It Works
+
+- Logs are synced from the server into `data/logs/`.
+- Storage report HTML is generated at `docs/reports/server-storage-util/index.html`.
+- GPU plots and index are generated at `docs/reports/server-gpu-util/`.
+- GitHub Actions runs daily and pushes `docs/` to GitHub Pages.
+
+## Project Structure
+
+- `scripts/` → report generation and log sync
+- `config/servers.json` → server list and storage doc links
+- `config/gpu-info.json` → GPU IDs and memory limits
+- `config/batches.json` → student batches (for alumni vs student tagging)
+- `data/logs/` → downloaded logs (ignored by git)
+- `docs/` → published site output
+
+## Local Development
+
+### Setup
+
 ```
-https://tesla.ce.pdn.ac.lk/servermonitoring/
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### Technical Specifications
+### Download Logs
 
-- **Update Frequency**: Dashboard updates every 24 hours
-- **Automation**: Code runs via GitHub Actions
-- **Architecture**: No backend required (static site)
-- **Deployment**: 
-  - Dashboard files pushed to `docs/` folder
-  - Rendered using GitHub Pages
-  - Accessible at: `https://cepdnaclk.github.io/servermonitoring/`
+```
+python scripts/sync_logs.py
+```
 
-### Reference Examples
+Custom base URL (must contain per-server folders like `kepler/`):
 
-For design inspiration, you may refer to:
-- [Server Storage Utilization Reports](https://cepdnaclk.github.io/maintenance/reports/server-storage-util/)
-- [Server GPU Utilization Reports](https://cepdnaclk.github.io/maintenance/reports/server-gpu-util/plots/)
+```
+python scripts/sync_logs.py --base-url https://tesla.ce.pdn.ac.lk/servermonitoring/logging/
+```
+
+### Build the Dashboard
+
+Build using local logs:
+
+```
+python scripts/build_dashboard.py
+```
+
+Build and download logs in one step:
+
+```
+python scripts/build_dashboard.py --download-logs
+```
+
+## Notes
+
+- Storage: `babbage` highlights alumni (>10GB, orange) and students (>50GB, yellow)
+  based on `config/batches.json`.
+- GPU plots show daily mean utilization and memory for the last 90 days.
 
 ## Contact
 
-If you would like to volunteer for this project, please contact:
-
-- **E/14/Gihan**: [Contact Page](https://www.cs.umd.edu/~gihan/contact/)
-- **E/15/Nuwan**: [Contact Page](https://nuwanjaliyagoda.com/contact/)
+- **E/14/Gihan**: https://people.ce.pdn.ac.lk/students/e14/158
+- **E/15/Nuwan**: https://nuwanjaliyagoda.com/contact/
