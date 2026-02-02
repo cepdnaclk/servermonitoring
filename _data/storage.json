@@ -1,0 +1,29 @@
+{
+  "servers": {
+    "kepler": {
+      "name": "kepler",
+      "doc_url": "https://docs.google.com/spreadsheets/d/1qyCokp9XNO9tOghKgX-2SNlR_Gaif1EEOa_mu7_nMOo/edit?usp=sharing",
+      "entries": []
+    },
+    "turing": {
+      "name": "turing",
+      "doc_url": "https://docs.google.com/spreadsheets/d/1f8G_oQVhBhKbaI_rw_gcaFTY4OFbP6T7RiUE66l-dvU/edit?usp=sharing",
+      "entries": []
+    },
+    "ampere": {
+      "name": "ampere",
+      "doc_url": "https://docs.google.com/spreadsheets/d/1p2YNp1HqxB9AmEj46M8egR1LJLmsHQ1kYz5Ncp-icJA/edit?usp=sharing",
+      "entries": []
+    },
+    "ada": {
+      "name": "ada",
+      "doc_url": "https://docs.google.com/spreadsheets/d/1v-OgHJj2iGqFuL6z3fmauJLV7rIlX6-EJBW_b1WpeQA/edit?usp=sharing",
+      "entries": []
+    },
+    "babbage": {
+      "name": "babbage",
+      "doc_url": null,
+      "entries": []
+    }
+  }
+}
