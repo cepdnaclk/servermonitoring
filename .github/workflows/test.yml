@@ -18,7 +18,7 @@ jobs:
           python-version: "3.11"
           cache: 'pip'
       
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
@@ -31,6 +31,22 @@ jobs:
       - name: Run tests
         run: |
           pytest tests/ -v --cov=src/servermonitoring --cov-report=term-missing --cov-report=xml
+      
+      - name: Test data generation
+        run: |
+          python scripts/build_data.py
+          ls -la _data/
+      
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      
+      - name: Test Jekyll build
+        run: |
+          bundle exec jekyll build --verbose
+          ls -la _site/
       
       - name: Upload coverage reports
         uses: codecov/codecov-action@v5
