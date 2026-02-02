@@ -1,0 +1,36 @@
+title: Server Monitoring Dashboard
+description: >-
+  Static dashboard for Department of Computer Engineering server utilization
+  (GPU and storage). Generated daily and published via GitHub Pages.
+baseurl: "/servermonitoring"
+url: "https://cepdnaclk.github.io"
+
+# Build settings
+theme: minima
+minima:
+  skin: classic
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:name
+
+# Exclude from processing
+exclude:
+  - .venv/
+  - venv/
+  - __pycache__/
+  - "*.pyc"
+  - .DS_Store
+  - data/
+  - scripts/
+  - config/
+  - src/
+  - tests/
+  - requirements.txt
+  - Makefile
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

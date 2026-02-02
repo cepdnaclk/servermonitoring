@@ -2,3 +2,11 @@ data/logs/
 __pycache__/
 *.pyc
 .DS_Store
+.venv/
+venv/
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+vendor/
