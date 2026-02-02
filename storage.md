@@ -79,3 +79,7 @@ permalink: /storage/
     font-size: 0.9em;
   }
 </style>
+
+---
+
+*This webpage was **VibeCoded** with **ChatGPT 5.2** + **GitHub Copilot Agent***

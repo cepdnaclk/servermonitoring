@@ -30,3 +30,7 @@ Data is automatically collected, processed, and published daily via GitHub Actio
 **Maintained by**: [E/14/Gihan](https://people.ce.pdn.ac.lk/students/e14/158) and [E/15/Nuwan](https://nuwanjaliyagoda.com/contact/)
 
 **Source Code**: [github.com/cepdnaclk/servermonitoring](https://github.com/cepdnaclk/servermonitoring)
+
+---
+
+*This webpage was **VibeCoded** with **ChatGPT 5.2** + **GitHub Copilot Agent***

@@ -136,3 +136,7 @@ permalink: /gpu/
     border-left: 4px solid #0b3d91;
   }
 </style>
+
+---
+
+*This webpage was **VibeCoded** with **ChatGPT 5.2** + **GitHub Copilot Agent***
