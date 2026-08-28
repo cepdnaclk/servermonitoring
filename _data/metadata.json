@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-02-02T11:39:35.995693",
+  "storage_servers": [
+    "kepler",
+    "turing",
+    "ampere",
+    "ada",
+    "babbage"
+  ],
+  "gpu_servers": [
+    "turing",
+    "kepler",
+    "ai4covid",
+    "ampere",
+    "ada"
+  ]
+}

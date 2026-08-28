@@ -1,0 +1,29 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="{{ 'feed.xml' | relative_url }}">
+            <svg class="svg-icon orange"><use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>{{ site.description | escape }}</p>
+      </div>
+    </div>
+
+    <div class="social-links">
+      {%- include social.html -%}
+    </div>
+
+    <p class="vibe-footer" style="margin-top: 20px; padding: 10px; background-color: #f5f5f5; border-radius: 4px; text-align: center;">
+      This webpage was <strong>VibeCoded</strong> with <strong>ChatGPT 5.2</strong> + <strong>GitHub Copilot Agent</strong> by 
+      <a href="https://people.ce.pdn.ac.lk/students/e14/158" target="_blank">E/14/Gihan</a>. 
+      Feel free to email regarding any questions.
+    </p>
+  </div>
+
+</footer>

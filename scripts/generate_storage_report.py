@@ -4,7 +4,6 @@ import json
 import re
 from pathlib import Path
 
-
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT_DIR / "config" / "servers.json"
 DEFAULT_BATCHES = ROOT_DIR / "config" / "batches.json"
@@ -40,9 +39,7 @@ def classify_babbage(
         return None, None
     student_id = match.group(1)
     batch = student_id[:3].lower()
-    profile_url = "https://people.ce.pdn.ac.lk/students/{}/{}/".format(
-        batch, student_id[3:6]
-    )
+    profile_url = f"https://people.ce.pdn.ac.lk/students/{batch}/{student_id[3:6]}/"
     if batch in student_batches:
         if usage_gb is not None and usage_gb > 50:
             return "yellow", profile_url

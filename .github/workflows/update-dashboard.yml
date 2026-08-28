@@ -11,29 +11,67 @@ on:
       - "scripts/**"
       - "config/**"
       - "requirements.txt"
+      - "_config.yml"
+      - "*.md"
+      - "_includes/**"
+      - "_layouts/**"
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
+    
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Build dashboard
-        run: python scripts/build_dashboard.py --download-logs
-      - name: Commit docs
+          cache: 'pip'
+      
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+      
+      - name: Download logs
+        run: python scripts/sync_logs.py
+        continue-on-error: true
+      
+      - name: Generate data
+        run: python scripts/build_data.py
+      
+      - name: Commit generated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs
+          git add _data
           if git diff --staged --quiet; then
-            echo "No changes to commit."
-            exit 0
+            echo "No data changes to commit."
+          else
+            git commit -m "Update data: $(date -u +%Y-%m-%d)"
+            git push
           fi
-          git commit -m "Update dashboard"
-          git push
+      
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "turing": {
+      "name": "turing",
+      "gpus": {}
+    },
+    "kepler": {
+      "name": "kepler",
+      "gpus": {}
+    },
+    "ai4covid": {
+      "name": "ai4covid",
+      "gpus": {}
+    },
+    "ampere": {
+      "name": "ampere",
+      "gpus": {}
+    },
+    "ada": {
+      "name": "ada",
+      "gpus": {}
+    }
+  }
+}

@@ -1,76 +1,140 @@
 # Server Monitoring Dashboard
 
-Static dashboard for Department of Computer Engineering server utilization
-(GPU and storage). Generated daily and published via GitHub Pages.
+Static dashboard for Department of Computer Engineering server utilization (GPU and storage). Generated daily and published via GitHub Pages.
 
-## Live Site
+## 🌐 Live Site
 
-`https://cepdnaclk.github.io/servermonitoring/`
+**[https://cepdnaclk.github.io/servermonitoring/](https://cepdnaclk.github.io/servermonitoring/)**
 
-## Data Source
+## 📋 Overview
 
-Base index (logs are under per-server folders):
-`https://tesla.ce.pdn.ac.lk/servermonitoring/`
+This project provides automated monitoring and visualization of:
+- **Storage utilization** across multiple department servers
+- **GPU metrics** including utilization and memory usage over time
+- **Historical trends** for the last 90 days
 
-## How It Works
+The system uses:
+- **Python** for data collection and transformation
+- **Jekyll** (minima theme) for static site generation
+- **GitHub Actions** for automated daily updates
 
-- Logs are synced from the server into `data/logs/`.
-- Storage report HTML is generated at `docs/reports/server-storage-util/index.html`.
-- GPU plots and index are generated at `docs/reports/server-gpu-util/`.
-- GitHub Actions runs daily and pushes `docs/` to GitHub Pages.
+## 🏗️ Architecture
 
-## Project Structure
+### Data Pipeline
 
-- `scripts/` → report generation and log sync
-- `config/servers.json` → server list and storage doc links
-- `config/gpu-info.json` → GPU IDs and memory limits
-- `config/batches.json` → student batches (for alumni vs student tagging)
-- `data/logs/` → downloaded logs (ignored by git)
-- `docs/` → published site output
+```
+External Logs → Python Scripts → JSON Data → Jekyll → Static Site
+```
 
-## Local Development
+1. **Data Collection**: `sync_logs.py` downloads logs from the monitoring server
+2. **Data Transformation**: `build_data.py` processes logs into Jekyll-friendly JSON
+3. **Site Generation**: Jekyll renders templates using data from `_data/*.json`
+4. **Publishing**: GitHub Actions deploys to GitHub Pages
+
+### Directory Structure
+
+```
+├── _config.yml              # Jekyll configuration
+├── _data/                   # Generated JSON data (consumed by Jekyll)
+│   ├── storage.json         # Storage usage data
+│   ├── gpu.json             # GPU metrics data
+│   └── metadata.json        # Site metadata
+├── _includes/               # Jekyll template fragments
+├── config/                  # Configuration files
+│   ├── servers.json         # Server list and documentation links
+│   ├── gpu-info.json        # GPU specifications
+│   └── batches.json         # Student batch identifiers
+├── src/servermonitoring/    # Python data processing modules
+│   ├── config.py            # Configuration loading utilities
+│   ├── storage.py           # Storage data processing
+│   └── gpu.py               # GPU data processing
+├── scripts/                 # Executable scripts
+│   ├── build_data.py        # Main data generation entrypoint
+│   └── sync_logs.py         # Log synchronization
+├── tests/                   # Python unit tests
+├── index.md                 # Homepage
+├── storage.md               # Storage report page
+├── gpu.md                   # GPU report page
+└── Makefile                 # Build automation
+```
+
+## 🚀 Local Development
+
+### Prerequisites
+
+- **Python 3.11+**
+- **Ruby 3.x** and **Bundler** (for Jekyll)
 
 ### Setup
 
-```
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/cepdnaclk/servermonitoring.git
+   cd servermonitoring
+   ```
+
+2. **Install Python dependencies**:
+   ```bash
+   make setup
+   ```
+
+3. **Install Jekyll dependencies** (requires Ruby):
+   ```bash
+   gem install bundler
+   bundle install
+   ```
+
+### Generate Data
+
+```bash
+make data
 ```
 
 ### Download Logs
 
-```
+```bash
 python scripts/sync_logs.py
 ```
 
-Custom base URL (must contain per-server folders like `kepler/`):
+### Build and Serve Site
 
-```
-python scripts/sync_logs.py --base-url https://tesla.ce.pdn.ac.lk/servermonitoring/logging/
-```
-
-### Build the Dashboard
-
-Build using local logs:
-
-```
-python scripts/build_dashboard.py
+```bash
+make site    # Build
+make serve   # Serve locally at http://localhost:4000/servermonitoring/
 ```
 
-Build and download logs in one step:
+## 🧪 Testing
 
+```bash
+make test    # Run tests with coverage
+make lint    # Run linting checks
+make format  # Auto-format code
 ```
-python scripts/build_dashboard.py --download-logs
-```
 
-## Notes
+## 🤖 CI/CD
 
-- Storage: `babbage` highlights alumni (>10GB, orange) and students (>50GB, yellow)
-  based on `config/batches.json`.
-- GPU plots show daily mean utilization and memory for the last 90 days.
+- **Testing**: Automatic PR checks (`.github/workflows/test.yml`)
+- **Deployment**: Daily updates (`.github/workflows/update-dashboard.yml`)
 
-## Contact
+## 📝 Makefile Commands
 
-- **E/14/Gihan**: https://people.ce.pdn.ac.lk/students/e14/158
-- **E/15/Nuwan**: https://nuwanjaliyagoda.com/contact/
+| Command | Description |
+|---------|-------------|
+| `make help` | Show available commands |
+| `make setup` | Install dependencies |
+| `make data` | Generate JSON data |
+| `make test` | Run tests |
+| `make lint` | Check code quality |
+| `make site` | Build Jekyll site |
+| `make serve` | Serve locally |
+| `make clean` | Remove artifacts |
+
+## 👥 Contributors
+
+- **E/14/Gihan**: [Profile](https://people.ce.pdn.ac.lk/students/e14/158)
+- **E/15/Nuwan**: [Website](https://nuwanjaliyagoda.com/contact/)
+
+## 🔗 Links
+
+- **Live Site**: [cepdnaclk.github.io/servermonitoring](https://cepdnaclk.github.io/servermonitoring/)
+- **Repository**: [github.com/cepdnaclk/servermonitoring](https://github.com/cepdnaclk/servermonitoring)

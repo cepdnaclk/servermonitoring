@@ -3,14 +3,14 @@ import datetime
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from generate_gpu_plots import build_gpu_plots, load_servers as load_gpu_servers
+from generate_gpu_plots import build_gpu_plots
+from generate_gpu_plots import load_servers as load_gpu_servers
 from generate_storage_report import (
     build_storage_report,
     load_storage_servers,
     load_student_batches,
 )
 from sync_logs import sync_logs
-
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
